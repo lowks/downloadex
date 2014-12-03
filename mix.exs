@@ -5,12 +5,13 @@ defmodule ElixirDownloadManager.Mixfile do
     [app: :downloadex,
      version: "0.0.1",
      elixir: "~> 1.0",
+     escript: [main_module: Runner],
      deps: deps]
   end
 
 
   def application do
-    [applications: [:logger],
+    [applications: [:logger, :exactor, :ibrowse, :httpotion, :tempfile],
      mod: {DownloadEx, []}]
   end
 

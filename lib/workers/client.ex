@@ -21,11 +21,7 @@ defmodule Client do
             "Range": "bytes=#{first}-#{last}",
             "Connection": "keep-alive"
         ]
-        ibrowse = [
-            proxy_host: String.to_char_list("localhost"),
-            proxy_port: 8080,
-            save_response_to_file: String.to_char_list(file)
-        ]
+        ibrowse = Dict.merge [save_response_to_file: String.to_char_list(file)], Application.get_env(:downloadex, :ibrowse, [])
 
         %HTTPotion.AsyncResponse{id: async_id} = HTTPotion.get(
             url,
@@ -53,7 +49,6 @@ defmodule Client do
 
     defhandleinfo %HTTPotion.AsyncChunk{id: id, chunk: chunk},
     state: {_, _, _, async_id}, export: false, when: id == async_id do
-        # debug inspect chunk
         noreply
     end
 

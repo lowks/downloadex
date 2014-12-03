@@ -5,7 +5,7 @@ defmodule HeaderChecker do
 
 
     defstart start_link(parent, url) do
-        Logger.info "Starting #{__MODULE__}"
+        info "Starting #{__MODULE__}"
         get_content_length(url)
         initial_state {parent, url}
     end
@@ -25,7 +25,7 @@ defmodule HeaderChecker do
 
     defp make_head_request(url) do
         HTTPotion.start
-        ibrowse = [proxy_host: String.to_char_list("localhost"), proxy_port: 8080]
+        ibrowse = Application.get_env(:downloadex, :ibrowse, [])
         response = HTTPotion.head url, [], [ibrowse: ibrowse]
 
         cond do
