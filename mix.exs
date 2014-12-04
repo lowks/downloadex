@@ -1,4 +1,4 @@
-defmodule ElixirDownloadManager.Mixfile do
+defmodule DownloadEx.Mixfile do
   use Mix.Project
 
   def project do

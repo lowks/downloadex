@@ -1,4 +1,4 @@
-defmodule ElixirDownloadManagerTest do
+defmodule DownloadExTest do
   use ExUnit.Case
 
   test "the truth" do
