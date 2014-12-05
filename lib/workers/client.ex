@@ -46,7 +46,7 @@ defmodule Client do
     end
 
 
-    defhandleinfo %HTTPotion.AsyncChunk{id: id, chunk: chunk},
+    defhandleinfo %HTTPotion.AsyncChunk{id: id},
     state: {_, _, _, async_id, _}, export: false, when: id == async_id do
         noreply
     end

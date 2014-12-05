@@ -3,11 +3,8 @@ import Supervisor.Spec
 defmodule DownloadEx do
     use Application
 
-    import Logger
-
 
     def start(_type, _args) do
-        Task.async(fn -> start_download("http://www.wswd.net/testdownloadfiles/10MB.zip") end)
         Supervisor.start_link [], [strategy: :rest_for_one, name: DownloadEx.Root]
     end
 
@@ -25,8 +22,14 @@ defmodule DownloadEx do
     def set_file_size(url, filesize) do
         %URI{path: path} = URI.parse(url)
         target = Path.join(System.cwd!, Path.basename(path))
-        Supervisor.start_child(DownloadEx.Root, worker(Concatenator, [target], restart: :transient))
-        Supervisor.start_child(DownloadEx.Root, supervisor(Receiver, [nil, url, 0..filesize], restart: :transient))
+        {:ok, _} = Supervisor.start_child(
+            DownloadEx.Root,
+            worker(Concatenator, [target], restart: :transient)
+        )
+        {:ok, _} = Supervisor.start_child(
+            DownloadEx.Root,
+            supervisor(Receiver, [nil, url, 0..filesize], restart: :transient)
+        )
     end
 
 

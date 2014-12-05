@@ -1,7 +1,7 @@
 use Mix.Config
 
 config :logger, :console,
-  level: :debug,
+  level: :warn,
   format: "$date $time [$level]$levelpad $metadata$message\n",
   metadata: [:user_id]
 
@@ -12,7 +12,7 @@ config :logger, :console,
 #     [
 #         proxy_user: 'XXXXX',
 #         proxy_password: 'XXXXX',
-#         proxy_host: 'proxy',
+#         proxy_host: 'localhost',
 #         proxy_port: 8080
 #     ]
 

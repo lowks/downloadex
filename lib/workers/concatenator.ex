@@ -19,6 +19,9 @@ defmodule Concatenator do
         Stream.map(ordered_files, &File.stream!(&1)) |> Stream.concat |> Stream.each(fn l -> f.(:ok, {:cont, l}) end)
             |> Stream.run
         f.(:ok, :done)
+        IO.puts "Downloaded file was saved to location \"#{target}\"."
+
+        ordered_files |> Enum.each &File.rm!(&1)
 
         reply ordered_files
     end

@@ -4,7 +4,7 @@ import Supervisor.Spec
 defmodule Manager do
     use Supervisor
 
-    @max_part_size 3_000_000 # bytes
+    @max_part_size 2_000_000 # bytes
 
 
     def start_link(receiver, url, range) do
