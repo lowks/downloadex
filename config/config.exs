@@ -6,13 +6,18 @@ config :logger, :console,
   metadata: [:user_id]
 
 
+# Sample configuration with Redis server:
+#
+# config :downloadex, :redis_connection_string, "redis://127.0.0.1:6379"
+
+
 # Sample configuration with proxy authentication:
 #
 # config :downloadex, :ibrowse,
 #     [
 #         proxy_user: 'XXXXX',
 #         proxy_password: 'XXXXX',
-#         proxy_host: 'localhost',
+#         proxy_host: 'proxy',
 #         proxy_port: 8080
 #     ]
 

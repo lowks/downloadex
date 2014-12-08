@@ -42,7 +42,7 @@ defmodule Receiver do
         end
 
         if file do
-            Concatenator.add_chunk(range, file)
+            GenServer.cast(Process.whereis(:Concatenator), {:add_chunk, range, file})
         end
 
         if parent do
@@ -53,12 +53,12 @@ defmodule Receiver do
             new_progress < last - first ->
                 debug "Missing #{inspect last - first - new_progress} bytes of range #{inspect range}" 
             parent ->
-                info "Range #{inspect range} saved to file #{file}."
+                info "Range #{inspect range} saved."
                 Receiver.finish_download(parent, range)
             true ->
                 IO.puts ""
                 IO.puts "Download completed."
-                Concatenator.concatenate_and_delete_chunks
+                GenServer.call(Process.whereis(:Concatenator), :concatenate_and_delete_chunks)
                 DownloadEx.stop_download
         end
 

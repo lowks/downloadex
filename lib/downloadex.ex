@@ -22,10 +22,14 @@ defmodule DownloadEx do
     def set_file_size(url, filesize) do
         %URI{path: path} = URI.parse(url)
         target = Path.join(System.cwd!, Path.basename(path))
-        {:ok, _} = Supervisor.start_child(
-            DownloadEx.Root,
-            worker(Concatenator, [target], restart: :transient)
-        )
+
+        redis_connection_string = Application.get_env(:downloadex, :redis_connection_string)
+        concatenator = case redis_connection_string do
+            nil -> worker(FileConcatenator,  [target], restart: :transient)
+            _   -> worker(RedisConcatenator, [target, url, redis_connection_string], restart: :transient)
+        end
+
+        {:ok, _} = Supervisor.start_child(DownloadEx.Root, concatenator)
         {:ok, _} = Supervisor.start_child(
             DownloadEx.Root,
             supervisor(Receiver, [nil, url, 0..filesize], restart: :transient)

@@ -1,8 +1,9 @@
-import Logger
-import Supervisor.Spec
-
 defmodule Manager do
     use Supervisor
+
+    import Logger
+    import Supervisor.Spec
+
 
     @max_part_size 2_000_000 # bytes
 
@@ -26,9 +27,11 @@ defmodule Manager do
             ]
         else
             info "#{inspect self} Start 1 client child."
-            children = [
-                worker(Client, [receiver, url, range])
-            ]
+            redis_connection_string = Application.get_env(:downloadex, :redis_connection_string)
+            children = case redis_connection_string do
+                nil -> [ worker(FileSystemClient, [receiver, url, range]) ]
+                _   -> [ worker(RedisClient,      [receiver, url, range, redis_connection_string]) ]
+            end
         end
         supervise(children, [strategy: :one_for_one])
     end

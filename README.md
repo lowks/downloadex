@@ -16,6 +16,11 @@ A fault-tolerant download manager in Elixir that can download a single file in p
 iex(1)> DownloadEx.start_download("http://www.wswd.net/testdownloadfiles/10MB.zip")
 ```
 
+## Redis Settings
+If you want to use Redis to serve chunks, add the connection settings to `config/config.exs`:
+```
+config :downloadex, :redis_connection_string, "redis://127.0.0.1:6379"
+```
 
 ## Proxy Settings
 Find sample configurations in `config/config.exs` that show how to set up proxy authentication and SOCKS5.
