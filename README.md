@@ -3,6 +3,8 @@ DownloadEx
 
 A fault-tolerant download manager in Elixir that can download a single file in parallel.
 
+[![Build Status](https://travis-ci.org/my-flow/downloadex.svg?branch=master)](https://travis-ci.org/my-flow/downloadex)
+
 
 ### Installation
 
