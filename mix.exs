@@ -6,7 +6,8 @@ defmodule DownloadEx.Mixfile do
      version: "0.0.1",
      elixir: "~> 1.0",
      escript: [main_module: Runner],
-     deps: deps]
+     deps: deps,
+     test_coverage: [tool: ExCoveralls]]
   end
 
 
@@ -19,10 +20,11 @@ defmodule DownloadEx.Mixfile do
   defp deps do
     [
       {:exactor, "~> 2.0.0"},
-      {:ibrowse, github: "cmullaparthi/ibrowse", tag: "v4.1.0"},
+      {:ibrowse, github: "cmullaparthi/ibrowse", tag: "v4.1.1"},
       {:httpotion, github: "kemonomachi/httpotion"},
       {:tempfile, github: "lowks/tempfile"},
-      {:exredis, github: "artemeff/exredis", tag: "0.1.0"}
+      {:exredis, github: "artemeff/exredis", tag: "0.1.0"},
+      {:excoveralls, "~> 0.3", only: [:dev, :test]}
     ]
   end
 end

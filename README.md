@@ -4,7 +4,7 @@ DownloadEx
 A fault-tolerant download manager in Elixir that can download a single file in parallel.
 
 [![Build Status](https://travis-ci.org/my-flow/downloadex.svg?branch=master)](https://travis-ci.org/my-flow/downloadex)
-
+[![Coverage Status](https://coveralls.io/repos/my-flow/downloadex/badge.svg?branch=master)](https://coveralls.io/r/my-flow/downloadex?branch=master)
 
 ### Installation
 
@@ -30,6 +30,6 @@ Find sample configurations in `config/config.exs` that show how to set up proxy 
 
 ## Copyright & License
 
-Copyright (c) 2014 [Florian J. Breunig](http://www.my-flow.com)
+Copyright (c) 2014-2015 [Florian J. Breunig](http://www.my-flow.com)
 
 Licensed under MIT, see LICENSE file.
